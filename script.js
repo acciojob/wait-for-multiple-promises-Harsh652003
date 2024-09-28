@@ -3,7 +3,6 @@ function getRandomTime() {
     return Math.random() * 2000 + 1000;  // Time in ms between 1000 and 3000
 }
 
-// Function to create a promise that resolves after a random time
 function createPromise(name) {
     const time = getRandomTime();
     return new Promise((resolve) => {
@@ -17,10 +16,8 @@ const promises = [
     createPromise('Promise 2'),
     createPromise('Promise 3')
 ];
-
-// Get the table body and show a loading message
 const tableBody = document.getElementById('output');
-tableBody.innerHTML = '<tr><td colspan="2">Loading...</td></tr>';
+tableBody.innerHTML = '<tr id="loading"><td colspan="2">Loading...</td></tr>';
 
 // Track the start time
 const startTime = Date.now();
@@ -29,11 +26,10 @@ const startTime = Date.now();
 Promise.all(promises).then((results) => {
     const totalTime = (Date.now() - startTime) / 1000;  // Total time in seconds
 
-    // Clear the loading message
+    
     tableBody.innerHTML = '';
 
-    // Populate the table with the results of each promise
-    results.forEach((result) => {
+ results.forEach((result) => {
         const row = `
             <tr>
                 <td>${result.name}</td>
@@ -43,7 +39,6 @@ Promise.all(promises).then((results) => {
         tableBody.innerHTML += row;
     });
 
-    // Add a final row for the total time
     const totalRow = `
         <tr>
             <td>Total</td>
